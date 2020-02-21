@@ -1,0 +1,14 @@
+{
+  "name": "productparser",
+  "version": "1.0.0",
+  "description": "Product parser for review db",
+  "main": "./bin/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "Ajay Bhasy",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.1"
+  }
+}
