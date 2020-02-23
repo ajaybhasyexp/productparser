@@ -50,22 +50,31 @@ class FlipkartParser {
     }
 
     saveProduct(flipProduct, category) {
-        let flipProdInfo = flipProduct.productBaseInfoV1;
-        let product = {};
-        let ecomDetails = [];
-        if (flipProdInfo.productId) {
-            product.name = flipProdInfo.title;
-            product.sourceId = flipProdInfo.productId;
-            product.description = (flipProdInfo.productDescription ? flipProdInfo.productDescription : flipProdInfo.title);
-            product.imageUrl = flipProdInfo.imageUrls['800x800'];
-            product.category = { categoryName: category.name, categoryId: category.id };
-            product.maximumRetailPrice = flipProdInfo.maximumRetailPrice.amount;
-            ecomDetails.push(this.getEcomDetail(flipProdInfo));
-            product.ecommerceDetails = ecomDetails;
-            product.updated = new Date();
-            dataService.ProductService.saveProduct(product);
-        } else {
-            console.log(`Product without id ${flipProduct}`);
+        try {
+            let flipProdInfo = flipProduct.productBaseInfoV1;
+            let product = {};
+            let ecomDetails = [];
+            if (flipProdInfo.productId) {
+                product.name = flipProdInfo.title;
+                product.sourceId = flipProdInfo.productId;
+                product.description = (flipProdInfo.productDescription ? flipProdInfo.productDescription : flipProdInfo.title);
+                product.imageUrl = flipProdInfo.imageUrls['800x800'];
+                product.category = { categoryName: category.name, categoryId: category.id };
+                product.maximumRetailPrice = flipProdInfo.maximumRetailPrice.amount;
+                ecomDetails.push(this.getEcomDetail(flipProdInfo));
+                product.ecommerceDetails = ecomDetails;
+                product.updated = new Date();
+                dataService.ProductService.saveProduct(product);
+            } else {
+                console.log(`Product without id ${flipProduct}`);
+            }
+        } catch (error) {
+            const log = {};
+            log.vendorId = source;
+            log.dataUrl = cat.sourceUrl;
+            log.errorDesc = "Error in catch of saveProduct";
+            logh.error = error;
+            dataService.ProdParseLogService.saveProdParseLog(log);
         }
     }
 
@@ -105,7 +114,6 @@ class FlipkartParser {
     };
 
     parseProducts(data) {
-        var promises = [];
         if (data) {
             data.forEach((cat) => {
                 this.saveProductsByUrl(cat);
@@ -114,27 +122,47 @@ class FlipkartParser {
     }
 
     saveProductsByUrl(cat) {
-        return axios.get(cat.sourceUrl, { headers })
+        return axios.get(cat.sourceUrl, { headers }, { timeout: 2 })
             .then((response) => {
-                let products = response.data.products;
-                if (products) {
-                    products.forEach((prod) => {
-                        this.saveProduct(prod, cat);
-                    });
-                    if (response.data.nextUrl) {
-                        this.saveProductsByUrl(cat);
+                try {
+                    let products = response.data.products;
+                    if (products) {
+                        products.forEach((prod) => {
+                            this.saveProduct(prod, cat);
+                        });
+                        // if (response.data.nextUrl) {
+                        //     this.saveProductsByUrl(cat);
+                        // }
+                    }
+                    else {
+                        if (response.data) {
+                            const log = {};
+                            log.vendorId = source;
+                            log.dataUrl = cat.sourceUrl;
+                            log.data = response.data;
+                            log.errorDesc = "No products in JSON";
+                            fs.writeFileSync(`op/${cat.name}.json`, response.data);
+                            dataService.ProdParseLogService.saveProdParseLog(log);
+                        }
                     }
                 }
-                else {
-                    if (response.data) {
-                        fs.writeFileSync(`op/${cat.name}.json`, cat.sourceUrl);
-                        console.log(response.data.length);
-                    }
+                catch (error) {
+                    const log = {};
+                    log.vendorId = source;
+                    log.dataUrl = cat.sourceUrl;
+                    log.data = response.data;
+                    log.errorDesc = "Error in catch of saveProductsByUrl";
+                    logh.error = error;
+                    dataService.ProdParseLogService.saveProdParseLog(log);
                 }
 
             }).catch((error) => {
-                console.error(error);
-                console.log(`Error while calling product url ${cat.sourceUrl}`);
+                const log = {};
+                log.vendorId = source;
+                log.dataUrl = cat.sourceUrl;
+                log.errorDesc = "Axios Error";
+                log.error = error;
+                dataService.ProdParseLogService.saveProdParseLog(log);
             });
     }
 }
