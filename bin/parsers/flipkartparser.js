@@ -19,6 +19,7 @@ class FlipkartParser {
     accessCategories(categoryName, object) {
         let categoryObject = object[categoryName];
         let category = this.createCategory(categoryObject);
+        console.log(`Saving category ${categoryName}`);
         dataService.CategoryService.checkAndSaveCategory(category);
     }
 
@@ -58,7 +59,9 @@ class FlipkartParser {
                 product.name = flipProdInfo.title;
                 product.sourceId = flipProdInfo.productId;
                 product.description = (flipProdInfo.productDescription ? flipProdInfo.productDescription : flipProdInfo.title);
-                product.imageUrl = flipProdInfo.imageUrls['800x800'];
+                product.imageUrl = flipProdInfo.imageUrls['200x200'];
+                product.image_400 = flipProdInfo.imageUrls['400x400'];
+                product.image_800 = flipProdInfo.imageUrls['800x800']
                 product.category = { categoryName: category.name, categoryId: category.id };
                 product.maximumRetailPrice = flipProdInfo.maximumRetailPrice.amount;
                 ecomDetails.push(this.getEcomDetail(flipProdInfo));

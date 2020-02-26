@@ -5,8 +5,8 @@ const dataService = require('E:\\Personal\\fastify\\reviewdb-data\\index');
 const affiliateId = 'ajaybhasy';
 const affiliateToken = '07ebe46dbe3d4baaa2abcd192651fd42';
 const url = "https://affiliate-api.flipkart.net/affiliate/api/ajaybhasy.json";
-// const mongoString = 'mongodb://fastifyuser:docker123@ds060649.mlab.com:60649/reviewdb';
-const mongoString = 'mongodb://localhost:27017/reviewdb';
+const mongoString = 'mongodb://fastifyuser:docker123@ds060649.mlab.com:60649/reviewdb';
+// const mongoString = 'mongodb://localhost:27017/reviewdb';
 const headers = { 'Fk-Affiliate-Id': affiliateId, 'Fk-Affiliate-Token': affiliateToken };
 
 dataService.createConnection(mongoString);
