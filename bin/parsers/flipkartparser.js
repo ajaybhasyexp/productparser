@@ -1,5 +1,5 @@
 'use strict'
-const dataService = require('E:\\Personal\\fastify\\reviewdb-data\\index');
+const dataService = require('E:\\ReviewDB-Fastify\\reviewdb-data\\index');
 const source = 'Flipkart';
 const fs = require('fs');
 const axios = require('axios').default;
@@ -119,13 +119,13 @@ class FlipkartParser {
     parseProducts(data) {
         if (data) {
             data.forEach((cat) => {
-                this.saveProductsByUrl(cat);
+                this.saveProductsByUrl(cat.sourceUrl, cat);
             });
         }
     }
 
-    saveProductsByUrl(cat) {
-        return axios.get(cat.sourceUrl, { headers }, { timeout: 2 })
+    saveProductsByUrl(url, cat) {
+        return axios.get(url, { headers }, { timeout: 2 })
             .then((response) => {
                 try {
                     let products = response.data.products;
@@ -133,9 +133,9 @@ class FlipkartParser {
                         products.forEach((prod) => {
                             this.saveProduct(prod, cat);
                         });
-                        // if (response.data.nextUrl) {
-                        //     this.saveProductsByUrl(cat);
-                        // }
+                        if (response.data.nextUrl) {
+                            this.saveProductsByUrl(response.data.nextUrl, cat);
+                        }
                     }
                     else {
                         if (response.data) {
