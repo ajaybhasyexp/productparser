@@ -1,0 +1,131 @@
+[
+    {
+        "productBaseInfoV1": {
+            "productId": "SFLE4WPUZAYZGTKY",
+            "title": "Shraddha Collections 023-Rd Safe Locker(Key Lock)",
+            "productDescription": "The Cash Box can be used in homes and offices. Various items like cash, jewelry, coins, etc. can be stored in it. One can keep it in the cupboard, bank locker, safe, drawer, etc. It is lightweight , portable and has a unique design..",
+            "imageUrls": {
+                "200x200": "https://rukminim1.flixcart.com/image/200/200/safe-locker/2/a/g/033-rd-shraddha-collections-original-imae4h4h7ucbkjy4.jpeg?q=90",
+                "400x400": "https://rukminim1.flixcart.com/image/400/400/safe-locker/2/a/g/033-rd-shraddha-collections-original-imae4h4h7ucbkjy4.jpeg?q=90",
+                "800x800": "https://rukminim1.flixcart.com/image/800/800/safe-locker/2/a/g/033-rd-shraddha-collections-original-imae4h4h7ucbkjy4.jpeg?q=90"
+            },
+            "productFamily": [
+                "SFLE4WPUZAYZGTKY"
+            ],
+            "maximumRetailPrice": {
+                "amount": 2999,
+                "currency": "INR"
+            },
+            "flipkartSellingPrice": {
+                "amount": 2499,
+                "currency": "INR"
+            },
+            "flipkartSpecialPrice": {
+                "amount": 2499,
+                "currency": "INR"
+            },
+            "productUrl": "https://www.flipkart.com/shraddha-collections-023-rd-safe-locker/p/itme4wpuvzhfqv5g?pid=SFLE4WPUZAYZGTKY&affid=ajaybhasy",
+            "productBrand": "Shraddha Collections",
+            "inStock": false,
+            "codAvailable": true,
+            "discountPercentage": 16,
+            "offers": [
+                "10% Instant Discount* with HDFC Bank Cards",
+                "5% off on Visa Cards for COD, New users",
+                "Extra 5% off* with Axis Bank Buzz Credit Card"
+            ],
+            "categoryPath": "Tools>Home Organizers & Storage>Safe Lockers",
+            "attributes": {
+                "size": "",
+                "color": "",
+                "storage": "",
+                "sizeUnit": "",
+                "displaySize": ""
+            }
+        },
+        "productShippingInfoV1": {
+            "shippingCharges": {
+                "amount": 0,
+                "currency": "INR"
+            },
+            "estimatedDeliveryTime": "Usually Delivered in 9 - 10 days.",
+            "sellerName": "Anil Agarwal",
+            "sellerAverageRating": 3.8,
+            "sellerNoOfRatings": 37,
+            "sellerNoOfReviews": 1
+        },
+        "categorySpecificInfoV1": {
+            "keySpecs": [
+                "Lock Type: Key Lock",
+                "Body Material: Steel",
+                "2 Shelves"
+            ],
+            "detailedSpecs": [
+                "Lock Type: Key Lock",
+                "Body Material: Steel",
+                "2 Shelves"
+            ],
+            "specificationList": [
+                {
+                    "key": "General",
+                    "values": [
+                        {
+                            "key": "Sales Package",
+                            "value": [
+                                "Cash Box, Keys"
+                            ]
+                        },
+                        {
+                            "key": "Model Number",
+                            "value": [
+                                "023-RD"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "Dimensions",
+                    "values": [
+                        {
+                            "key": "Width",
+                            "value": [
+                                "24.38 cm"
+                            ]
+                        },
+                        {
+                            "key": "Height",
+                            "value": [
+                                "9.14 cm"
+                            ]
+                        },
+                        {
+                            "key": "Depth",
+                            "value": [
+                                "30.48 cm"
+                            ]
+                        },
+                        {
+                            "key": "Weight",
+                            "value": [
+                                "1.9 kg"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "booksInfo": {
+                "language": null,
+                "binding": null,
+                "pages": null,
+                "publisher": null,
+                "year": 0,
+                "authors": []
+            },
+            "lifeStyleInfo": {
+                "sleeve": null,
+                "neck": null,
+                "idealFor": null
+            }
+        }
+    }
+]
