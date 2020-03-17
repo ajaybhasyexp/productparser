@@ -1,5 +1,5 @@
 'use strict'
-const dataService = require('E:\\ReviewDB-Fastify\\reviewdb-data\\index');
+const dataService = require('E:\\Personal\\fastify\\reviewdb-data\\index');
 const source = 'Flipkart';
 const fs = require('fs');
 const axios = require('axios').default;
@@ -26,12 +26,21 @@ class FlipkartParser {
     createCategory(categoryObject) {
         var category = {};
         category.desc = categoryObject.apiName;
-        category.name = categoryObject.apiName;
+        category.name = this.snakeCaseConvertor(categoryObject.apiName);
         category.sourceUrl = categoryObject.availableVariants['v1.1.0']['get'];
         category.sourceId = this.parseCategoryUrl(category.sourceUrl);
         category.source = source;
         category.ecommerceLinks = { 'key': 'Flipkart', 'value': this.getCatLink(category.name, category.sourceId) };
         return category;
+    }
+
+    snakeCaseConvertor(name) {
+        var splitArray = name.split('_');
+        var catName = '';
+        splitArray.forEach(element => {
+            catName += ' ' + element.charAt(0).toUpperCase() + element.slice(1);
+        });
+        return catName.trim();
     }
 
     getCatLink(categoryname, catId) {
