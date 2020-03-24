@@ -1,5 +1,5 @@
 'use strict'
-const dataService = require('E:\\Personal\\fastify\\reviewdb-data\\index');
+const dataService = require('E:\\ReviewDB-Fastify\\reviewdb-data\\index');
 const source = 'Flipkart';
 const fs = require('fs');
 const axios = require('axios').default;
@@ -76,6 +76,12 @@ class FlipkartParser {
                 ecomDetails.push(this.getEcomDetail(flipProdInfo));
                 product.ecommerceDetails = ecomDetails;
                 product.updated = new Date();
+                if (flipProdInfo.productBrand) {
+                    product.brand = flipProdInfo.productBrand;
+                    // let brand = {};
+                    // brand.name = flipProdInfo.productBrand;
+                    // dataService.BrandService.checkAndSaveBrand(brand);
+                }
                 dataService.ProductService.saveProduct(product);
             } else {
                 console.log(`Product without id ${flipProduct}`);
